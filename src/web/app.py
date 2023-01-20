@@ -1,12 +1,15 @@
 from flask import Flask
 
-app = Flask(__name__)
+from web.general.routes import Routes as GeneralRoutes
 
 
-@app.route('/')
-def hello_world():  # put application's code here
-    return 'Hello World!'
+class App:
+    @staticmethod
+    def main():
+        app = Flask(__name__)
+        app.register_blueprint(GeneralRoutes.blueprint)
+        app.run()
 
 
 if __name__ == '__main__':
-    app.run()
+    App.main()
