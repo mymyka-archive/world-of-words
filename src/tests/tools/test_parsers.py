@@ -15,6 +15,6 @@ class TestTextParser(TestCase):
 class TestWebsiteParser(TestCase):
     def test_content(self):
         link: str = "https://en.wikipedia.org/wiki/Anime"
-        parser: Parser = WebsiteParser(link)
+        parser: WebsiteParser = WebsiteParser(link)
         self.assertGreater(len(parser.content), 100)
         self.assertEqual(parser.status_code, 200)
