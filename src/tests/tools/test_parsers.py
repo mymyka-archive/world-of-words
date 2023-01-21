@@ -10,3 +10,11 @@ class TestTextParser(TestCase):
                     "r8 B QE $ d Fv$K!n Y Maeegn DuW 8K3"
         parser: Parser = TextParser(text)
         self.assertEqual(parser.content, text)
+
+
+class TestWebsiteParser(TestCase):
+    def test_content(self):
+        link: str = "https://en.wikipedia.org/wiki/Anime"
+        parser: Parser = WebsiteParser(link)
+        self.assertGreater(len(parser.content), 100)
+        self.assertEqual(parser.status_code, 200)

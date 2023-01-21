@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup, Comment
 class Parser(ABC):
     def __init__(self, src: str):
         self._src: str = src
-        self._buffer: str = ""
+        self._buffer: str = None
 
     @property
     def source(self):
@@ -31,7 +31,7 @@ class TextParser(Parser):
 class WebsiteParser(Parser):
     def __init__(self, src: str):
         super().__init__(src)
-        self._status_code: int
+        self._status_code: int = None
 
     @property
     def status_code(self) -> int:
