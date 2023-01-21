@@ -6,7 +6,15 @@ from bs4 import BeautifulSoup, Comment
 class Parser(ABC):
     def __init__(self, src: str):
         self._src: str = src
-        self._buffer: str
+        self._buffer: str = ""
+
+    @property
+    def source(self):
+        return self._src
+
+    @property
+    def buffer(self):
+        return self._buffer
 
     @property
     @abstractmethod
@@ -26,7 +34,11 @@ class WebsiteParser(Parser):
         self._status_code: int
 
     @property
-    def content(self) -> str:
+    def status_code(self) -> int:
+        return self._status_code
+
+    @property
+    def content(self) -> str | None:
         if self._buffer is not None and self._status_code == 200:
             return self._buffer
         status_code: int = self.__parse()
