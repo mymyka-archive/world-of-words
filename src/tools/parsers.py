@@ -10,3 +10,9 @@ class Parser(ABC):
     @abstractmethod
     def content(self) -> str:
         pass
+
+
+class TextParser(Parser):
+    @property
+    def content(self) -> str:
+        return self._src
