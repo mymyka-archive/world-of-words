@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, render_template
 
 
 class Routes:
@@ -12,4 +12,4 @@ class Routes:
     @blueprint.route('/')
     @staticmethod
     def index():
-        return "Hello"
+        return render_template('index.html')
