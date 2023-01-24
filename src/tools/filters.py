@@ -20,58 +20,59 @@ class RegExFilter(Filter):
 
 
 class StringFilter(Filter):
-    def filter(self, string: str) -> str:
-        return string
+    def filter(self, s: str) -> str:
+        return s
 
 
 class UppercaseStringFilter(StringFilter):
     def __init__(self, f: StringFilter):
         self.__filter = f
 
-    def filter(self, string: str) -> str:
-        string = self.__filter.filter(string)
-        string = string.lower()
-        return string
+    def filter(self, s: str) -> str:
+        s = self.__filter.filter(s)
+        s = s.lower()
+        return s
 
 
 class RegExStringFilter(RegExFilter, StringFilter):
-    __REGEX_PATTERN = ""
+    __PATTERN = ""
 
-    def filter(self, string: str) -> str:
-        return string
+    def filter(self, s: str) -> str:
+        return s
 
     @property
     def regex(self) -> str:
-        return self.__REGEX_PATTERN
+        return self.__PATTERN
 
 
 class NumberRegExStringFilter(RegExStringFilter):
-    __REGEX_PATTERN = "[0-9]"
+    __PATTERN = "0-9"
 
     def __init__(self, f: RegExFilter):
         self.__filter = f
 
-    def filter(self, string: str) -> str:
-        regex = f'{self.__filter.regex}|{self.__REGEX_PATTERN}'
-        string = re.sub(regex, '', string)
-        return string
+    def filter(self, s: str) -> str:
+        regex = f'[^{self.regex}]'
+        print(regex)
+        s = re.sub(regex, '', s)
+        return s
 
     @property
     def regex(self) -> str:
-        return f'{self.__filter.regex}|{self.__REGEX_PATTERN}'
+        return f'{self.__filter.regex}{self.__PATTERN}'
 
 
 class SpecialCharsRegExStringFilter(RegExStringFilter):
-    __REGEX_PATTERN = "[^a-zA-Z0-9\s]"
+    __PATTERN = "@#$%"
 
     def __init__(self, f: RegExFilter):
         self.__filter = f
 
-    def filter(self, string: str) -> str:
-        regex = f'{self.__filter.regex}|{self.__REGEX_PATTERN}'
-        string = re.sub(regex, '', string)
-        return string
+    def filter(self, s: str) -> str:
+        regex = f'[^{self.regex}]'
+        s = re.sub(regex, '', s)
+        return s
 
     @property
     def regex(self) -> str:
-        return f'{self.__filter.regex}|{self.__REGEX_PATTERN}'
+        return f'{self.__filter.regex}{self.__PATTERN}'
