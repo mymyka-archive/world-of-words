@@ -1,11 +1,13 @@
 {%  extends 'layout.html' %}
 
 {% block account %}
-    <button
-            class="btn btn-outline-primary me-2 shadow-sm"
-            type="submit">
-        Sign in
-    </button>
+    <form action="/signin">
+        <button
+                class="btn btn-outline-primary me-2 shadow-sm"
+                type="submit">
+            Sign in
+        </button>
+    </form>
     <button
             class="btn btn-outline-primary shadow-sm"
             type="submit">
