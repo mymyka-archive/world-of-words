@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% if session["email"] %}
+        You are logged in as {{ session["email"] }}. <a href="/logout">Log out</a>
+    {% else %}
+        HOME FIX
+    {% endif %}
+</body>
+</html>
